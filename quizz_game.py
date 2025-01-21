@@ -63,13 +63,24 @@ def quiz():
             print(f"{j}. {choice}")
 
         while True:
-            user_input = input("Your answer (enter number or text): ").strip()
-            # Vérification si l'utilisateur entre un nombre ou du texte
-            if user_input.isdigit():
-                user_choice = int(user_input)
-                if 1 <= user_choice <= len(question['choices']):
-                    selected_answer = question['choices'][user_choice - 1]
-                    break
+            replay = input("Do you want to play again? (yes/no): ").strip().lower()
+            if replay == 'yes':
+                quiz()
+                break
+            elif replay == 'no':
+                print("Thanks for playing!")
+                break
+            else:
+                print("Please enter 'yes' or 'no'.")
+
+                user_input = input("Your answer (enter number or text): ").strip()
+                # Vérification si l'utilisateur entre un nombre ou du texte
+                
+                if user_input.isdigit():
+                    user_choice = int(user_input)
+                    if 1 <= user_choice <= len(question['choices']):
+                        selected_answer = question['choices'][user_choice - 1]
+                        break
                 else:
                     print("Please enter a valid number.")
             else:
