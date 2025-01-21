@@ -63,16 +63,23 @@ def quiz():
             print(f"{j}. {choice}")
 
         while True:
-            try:
-                user_choice = int(input("Your answer (enter number): "))
+            user_input = input("Your answer (enter number or text): ").strip()
+            # Vérification si l'utilisateur entre un nombre ou du texte
+            if user_input.isdigit():
+                user_choice = int(user_input)
                 if 1 <= user_choice <= len(question['choices']):
+                    selected_answer = question['choices'][user_choice - 1]
                     break
                 else:
                     print("Please enter a valid number.")
-            except ValueError:
-                print("Please enter a valid number.")
+            else:
+                selected_answer = user_input
+                if selected_answer in question['choices']:
+                    break
+                else:
+                    print("Please enter a valid choice.")
 
-        if question['choices'][user_choice - 1] == question['answer']:
+        if selected_answer == question['answer']:
             print("Correct! You earn 1 point.\n")
             score += 1
         else:
